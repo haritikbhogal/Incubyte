@@ -1,18 +1,61 @@
 import unittest
-from spacecraft import GalacticSpacecraft
+# from code import   # Import your Spacecraft class
+from spacecraft import Spacecraft
+# from code import Spacecraft
 
-class TestGalacticSpacecraft(unittest.TestCase):
-    def test_execution(self):
-        initial_position = [0, 0, 0]
-        initial_direction = 'N'
-        commands = ['f', 'r', 'u', 'b', 'l']
 
-        spacecraft = GalacticSpacecraft(initial_position, initial_direction)
-        spacecraft.execute_commands(commands)
-        final_position, final_direction = spacecraft.get_final_position()
+class TestSpacecraft(unittest.TestCase):
+    def test_move_forward_north(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "North"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.move_forward()
+        self.assertEqual(spacecraft.y, 1)
 
-        self.assertEqual(final_position, (0, 1, -1))
-        self.assertEqual(final_direction, 'N')
+    def test_move_forward_south(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "South"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.move_forward()
+        self.assertEqual(spacecraft.y, -1)
 
-if __name__ == "__main__":
+    def test_move_forward_east(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "East"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.move_forward()
+        self.assertEqual(spacecraft.x, 1)
+
+    def test_move_forward_west(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "West"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.move_forward()
+        self.assertEqual(spacecraft.x, -1)
+    
+    def test_turn_left_west(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "West"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.turn_left()
+        self.assertEqual(spacecraft.direction, "South")
+    
+    def test_turn_right_east(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "East"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.turn_right()
+        self.assertEqual(spacecraft.direction, "South")
+    
+    def test_move_backward_west(self):
+        starting_position = (0, 0, 0)
+        initial_direction = "West"
+        spacecraft = Spacecraft(*starting_position, initial_direction)
+        spacecraft.move_backward()
+        self.assertEqual(spacecraft.x, 1)
+
+
+    # Add more test methods for other functionality
+# TestSpacecraft.test_move_forward_south()
+if __name__ == '__main__':
     unittest.main()
