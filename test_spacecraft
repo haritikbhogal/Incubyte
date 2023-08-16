@@ -1,0 +1,18 @@
+import unittest
+from spacecraft import GalacticSpacecraft
+
+class TestGalacticSpacecraft(unittest.TestCase):
+    def test_execution(self):
+        initial_position = [0, 0, 0]
+        initial_direction = 'N'
+        commands = ['f', 'r', 'u', 'b', 'l']
+
+        spacecraft = GalacticSpacecraft(initial_position, initial_direction)
+        spacecraft.execute_commands(commands)
+        final_position, final_direction = spacecraft.get_final_position()
+
+        self.assertEqual(final_position, (0, 1, -1))
+        self.assertEqual(final_direction, 'N')
+
+if __name__ == "__main__":
+    unittest.main()
